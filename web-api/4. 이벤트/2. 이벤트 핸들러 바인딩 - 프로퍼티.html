@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background: orange;
+        margin: 20px;
+      }
+      .green {
+        background: yellowgreen;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .red {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="b1" class="box"></div>
+    <div id="b2" class="box green"></div>
+    <div id="b3" class="box red"></div>
+
+    <script>
+      function sayGoodbyeHandler() {
+        alert('byebye~~~');
+      }
+
+      const $b1 = document.getElementById('b1');
+      $b1.onclick = function () {
+        alert('hello!');
+      };
+
+      document.getElementById('b2').ondblclick = sayGoodbyeHandler;
+
+      // 프로퍼티 방식의 단점: 같은 타입의 이벤트에는 여러 핸들러를 등록할 수 없음.
+      const $b3 = document.getElementById('b3');
+      $b3.onclick = () => {
+        alert('b3가 클릭됨!');
+      };
+
+      $b3.onclick = sayGoodbyeHandler;
+    </script>
+  </body>
+</html>
