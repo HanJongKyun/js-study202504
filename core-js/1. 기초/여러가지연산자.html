@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log(3 ** 4); // ES7 이후 출시된 거듭제곱 연산자.
+
+      // 증감 연산자 ++, --는 자바와 동일하게 사용 가능합니다.
+      // 전위, 후위 연산도 동일합니다.
+
+      // 비교 연산자
+      const a = 5,
+        b = '5';
+
+      console.log(a == b); // 암묵적으로 형 변환 후에 동등 비교
+      console.log(a === b); // 타입까지 일치하는 지 비교
+
+      console.log('--------------------------------------');
+      // ==은 결과 예측이 힘들기 때문에 조심하셔야 합니다. (권장 x)
+      console.log('0' == ''); //false
+      console.log(0 == ''); // true
+      console.log(0 == '0'); // true
+      console.log(false == 'false'); // false
+      console.log(false == '0'); // true
+
+      // 일치 비교(===)에서는 NaN을 주의.
+      // NaN은 자신과 일치하지 않는 유일한 값입니다.
+      console.log(NaN === NaN); // false
+
+      // 문자열 비교 (대/소문자는 철저하게 구분)
+      console.log('apple' === 'Apple');
+    </script>
+  </body>
+</html>
