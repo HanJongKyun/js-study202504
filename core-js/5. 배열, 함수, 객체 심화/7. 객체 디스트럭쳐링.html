@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const employee = {
+        empName: '뽀로로',
+        age: 10,
+        hireDate: '2020-01-30',
+        birthDate: '2015-12-31',
+      };
+
+      const { empName, hireDate } = employee;
+      console.log(`name: ${empName}, hire: ${hireDate}`);
+
+      // 매개변수에서 객체 디스트럭쳐링
+      function foo({ empName, age }) {
+        console.log(`내 이름은 ${empName}입니다.`);
+        console.log(`나이는 ${age}살 입니다.`);
+      }
+      foo(employee);
+
+      // 프로퍼티의 키 값이 식별자로 부적합한 경우
+      // 프로퍼티: 변수명 -> 원하는 변수명으로 프로퍼티 값을 받을 수 있다.
+      const divStyle = {
+        'font-size': '18px',
+        'backgroud-color': 'red',
+      };
+      const { 'font-size': fontSize, 'background-color': bg } = divStyle;
+
+      console.log('--------------------------------------------------');
+
+      const dog = {
+        kind: '말티즈',
+        name: '해피',
+        age: 3,
+        injection: false,
+      };
+      const { kind, age: petAge, ...rest } = dog;
+      console.log(kind);
+      console.log(petAge);
+      console.log(rest);
+
+      // 객체 복사
+      const copydog = { ...dog };
+      copydog.age = 100;
+
+      console.log(dog);
+      console.log(copydog);
+    </script>
+  </body>
+</html>
