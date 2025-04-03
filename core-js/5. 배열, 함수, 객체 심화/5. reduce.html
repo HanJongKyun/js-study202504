@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 배열고차함수 reduce : 배열의 각 요소들을 주어진 콜백에 맞게 합산, 누적하여
+      //                    하나의 결과값을 반환하는 함수
+      // reduce에 들어가는 callback
+      // callback(accumulator, currentValue)
+      // accumulator: 어떤 데이터를 계속 쌓아가는 변수
+      // currentValue: 현재 루프회차에서 사용할 데이터
+      // reduce는 반복을 실행할때마다 currentValue를 accumulator에 누적함
+
+      const numbers = [10, 20, 30, 40, 50, 60];
+
+      const result = numbers.reduce((a, b) => {
+        console.log(`a: ${a}`);
+        console.log(`b: ${b}`);
+        console.log('---------------------');
+        return a + b;
+      }, 0);
+
+      // reduce의 콜백함수 다음 파라미터는 initialValue를 의미하며
+      // 반복문의 accumulator시작값을 의미함
+      // 따라서 0을 시작값으로 두고 return a + b; 를 하면
+      // 0 + 1 + 2 + 3 + 4 + 5 + 6
+      // 시작값을 없애면 accumulator의 시작값이 0번인덱스로 지정되며
+      // 1 + 2 + 3 + 4 + 5 + 6
+
+      console.log(`result: ${result}`);
+
+      const appleBasket = [
+        {
+          color: 'green',
+          sweet: 13,
+        },
+        {
+          color: 'red',
+          sweet: 14,
+        },
+        {
+          color: 'red',
+          sweet: 11,
+        },
+        {
+          color: 'green',
+          sweet: 6,
+        },
+        {
+          color: 'green',
+          sweet: 7,
+        },
+        {
+          color: 'green',
+          sweet: 9,
+        },
+      ];
+
+      const totalSweet = appleBasket.reduce(
+        (total, apple) => total + apple.sweet,
+        0
+      );
+      console.log(`사과 당도 총합: ${totalSweet}`);
+
+      console.log('-----------------------------------------');
+
+      // 색깔별로 사과의 개수를 카운트 해 보자!
+      const countByColor = appleBasket.reduce((count, apple) => {
+        if (apple.color in count) {
+          // 사과의 색깔이 count 객체에 프로퍼티로 이미 존재한다면? -> 하나 올려!
+          count[apple.color]++;
+        } else {
+          // 사과 색깔이 count에 없다? -> 처음 들어온 색깔 -> 1로 프로퍼티 추가!
+          count[apple.color] = 1;
+        }
+        return count; // 세팅된 객체를 다음 회차에서도 사용하도록 리턴.
+      }, {});
+
+      console.log(countByColor);
+    </script>
+  </body>
+</html>
