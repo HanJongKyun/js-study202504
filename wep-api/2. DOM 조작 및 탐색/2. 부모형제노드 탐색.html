@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="fruits">
+      <li class="f-item ap">사과</li>
+      <li class="f-item bn">바나나</li>
+      <li class="f-item gp">포도</li>
+      <li class="f-item pc">복숭아</li>
+    </ul>
+
+    <div id="wrapper">
+      <section class="contents">
+        <ul class="list">
+          <li class="item"><a href="#" class="link">10</a></li>
+          <li class="item"><a href="#" class="link active">20</a></li>
+          <li class="item"><a href="#" class="link">30</a></li>
+        </ul>
+        <ul class="list">
+          <li class="item"><a href="#" class="link">40</a></li>
+          <li class="item"><a href="#" class="link">50</a></li>
+          <li class="item"><a href="#" class="link">60</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      const $ul = document.getElementById('fruits');
+
+      // 배열 디스트럭쳐링 -> ul의 자식 요소들을 순수 배열로 바꾼 후
+      // apple, banana. grape가 있는 li만 변수에 따로 할당.
+      const [$apple, $banana, $grape] = [...$ul.children];
+      $grape.style.color = 'violet';
+
+      $grape.nextElementSibling.style.color = 'pink'; //grape의 다음요소
+      $grape.previousElementSibling.style.color = 'yellow'; //grape의 이전요소
+
+      const $active = document.querySelector('.active');
+
+      //   $active
+      //     .parentElement // li
+      //     .parentElement // ul
+      //     .nextElementSibling // 다음 형제 ul
+      //     .lastElementChild // 마지막 세번째 li
+      //     .firstElementChild // a태그
+      //     .style.color = 'red'
+
+      // 기준 태그로부터 위로 올라가면서 탐색하는 함수
+      // closest('css selector')
+      const $content = $active.closest('section.contents');
+      console.log($content);
+
+      $active
+        .closest('.list') // 첫번째 ul
+        .nextElementSibling // 두번째 ul
+        .querySelector('li:last-child > a').style.color = 'red'; // 마지막 a태그 -> 60
+    </script>
+  </body>
+</html>
