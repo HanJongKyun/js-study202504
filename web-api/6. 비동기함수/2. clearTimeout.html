@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="start">시작</button>
+    <button id="cancel">취소</button>
+    <p class="msg"></p>
+
+    <script>
+      const $start = document.getElementById('start');
+      const $cancel = document.getElementById('cancel');
+      const $msg = document.querySelector('.msg');
+
+      let timer = null;
+
+      $start.addEventListener('click', () => {
+        // 연속 클릭 시 기존 타이머 취소
+        if (timer) {
+          // 기존에 timeout 함수가 걸려있다면
+          clearTimeout(timer);
+          timer = null;
+        }
+      });
+
+      $start.addEventListener('click', () => {
+        timer = setTimeout(() => {
+          $msg.textContent = '안녕하세요~!';
+        }, 2000);
+      });
+
+      $cancel.addEventListener('click', () => {
+        clearTimeout(timer);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="timeout">3초 후 메세지 보기</button>
+    <p class="msg"></p>
+
+    <script>
+      // 동기: 코드가 위에서 아래로 순차적으로 실행된다.
+      // 비동기: 코드가 순차적으로 실행됨을 보장하지 않는다!
+
+      const $btn = document.getElementById('timeout');
+      $btn.addEventListener('click', (e) => {
+        // 일정시간 후의 콜백함수를 호출해 주는 setTimeout
+        setTimeout(() => {
+          document.querySelector('.msg').textContent =
+            '3초가 지난 후 메세지 입니다.';
+        }, 3000); // 밀리초로 주세요.
+
+        console.log('setTimeout 이후에 작성한 로그입니다.');
+      });
+    </script>
+  </body>
+</html>
