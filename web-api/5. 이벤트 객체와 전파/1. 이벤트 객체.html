@@ -10,6 +10,11 @@
 
     <input id="agree" type="checkbox" /> 동의
 
+    <hr />
+
+    <input type="text" id="input-text" />
+    <p id="msg"></p>
+
     <script>
       // 문서 전체에 이벤트 핸들러 등록
       /*
@@ -33,6 +38,25 @@
           alert('동의 하셨습니다!');
         } else {
           alert('동의 안하시면 다음페이지로 못갑니다~');
+        }
+      });
+
+      ////////////////////////////////////////////////////////////////////////////////////////
+
+      const $input = document.getElementById('input-text');
+      const $msg = document.getElementById('msg');
+
+      $input.addEventListener('keyup', (e) => {
+        // console.log('keyup 이벤트 발생');
+        // console.log(`입력한 값: ${e.target.value}`);
+        // console.log(`지금 누른 값: ${e.keyCode}`);
+        if (e.keyCode === 13) {
+          // keyup 한 자판이 enter니?
+          $msg.textContent = e.target.value;
+          e.target.value = '';
+        } else if (e.keyCode === 27) {
+          // esc
+          $msg.textContent = '';
         }
       });
     </script>
