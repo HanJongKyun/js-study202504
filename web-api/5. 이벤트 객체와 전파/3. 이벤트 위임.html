@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,7 +64,7 @@
         /*
         // 1. active 클래스 제거
         removeActive();
-        // 2. 현재 클릭 대상에 active 클래스 추가
+        //2. 현재 클릭 대상에 active 클래스 추가
         e.target.classList.add('active');
         */
         [...$fruits.children].forEach(($li) => {
@@ -73,7 +73,7 @@
          해당 논리값이 true로 판명나면
          지정한 클래스를 추가하고,
          false로 판명나면 지정한 클래스를 삭제합니다.
-        */
+         */
           $li.classList.toggle('active', $li === e.target);
         });
       });
@@ -83,16 +83,16 @@
 
       $addBtn.addEventListener('click', (e) => {
         /*
-            입력창에 과일 이름을 쓰고
+            입력창에 과일 이름을 쓰고 
             '추가' 버튼을 누르면  <-- 이벤트
-            입력창에 있는 텍스트가
-            <li id='텍스트'>텍스트</li>
+            입력창에 있는 텍스트가 
+            <li id='텍스트'>텍스트</li> 
             이런 형태로 생성되어 ul의 끝자식으로
             추가되어야 한다.
         */
         const $newLi = document.createElement('li');
         $newLi.textContent = $input.value;
-        $newLi.setAttribute('class', $input.value);
+        $newLi.setAttribute('id', $input.value);
 
         $fruits.appendChild($newLi);
 
@@ -104,6 +104,7 @@
       // li가 추가되게 하자.
       $input.addEventListener('keyup', (e) => {
         if (e.keyCode === 13) {
+          // 추가 버튼 클릭!
           $addBtn.click();
         }
       });
