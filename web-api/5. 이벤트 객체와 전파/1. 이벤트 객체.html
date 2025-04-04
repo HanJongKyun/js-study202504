@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span class="msg"></span>
+
+    <input id="agree" type="checkbox" /> 동의
+
+    <script>
+      // 문서 전체에 이벤트 핸들러 등록
+      /*
+      document.addEventListener('click', (e) => {
+        console.log('클릭 이벤트 발생!');
+        console.log(e);
+        document.querySelector(
+          '.msg'
+        ).textContent = `x 좌표: ${e.offsetX}, y좌표: ${e.offsetY}`;
+      });
+      */
+
+      const $checkbox = document.getElementById('agree');
+
+      $checkbox.addEventListener('change', (e) => {
+        // 실제 이벤트가 발생한 요소 -> 이벤트가 누구에게 발생되었는지를 파악할 때 많이 사용!
+        // console.log(e.target);
+
+        // 체크박스 or radio 버튼의 체크 유무를 확인한느 프로퍼티
+        if (e.target.checked) {
+          alert('동의 하셨습니다!');
+        } else {
+          alert('동의 안하시면 다음페이지로 못갑니다~');
+        }
+      });
+    </script>
+  </body>
+</html>
