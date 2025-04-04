@@ -1,4 +1,6 @@
 // export한 데이터를 별칭을 붙여서 사용하는 것이 가능합니다.
+// default가 아닌 export 데이터를 import 할 때는 중괄호 사용하여 import 해야 합니다.
+// 쓰고 싶은 데이터만 골라서 import는 가능합니다.
 import { $btn } from './getDom.js';
 
 // default로 export된 데이터는 같은 이름을 써도 되지만,
