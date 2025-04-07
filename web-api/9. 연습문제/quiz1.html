@@ -18,21 +18,25 @@
     <button id="minus">-</button>
 
     <script>
-      const $plusBtn = document.getElementById("plus");
-      const $minusBtn = document.getElementById("minus");
-      const $result = document.getElementById("result");
+      const $plusBtn = document.getElementById('plus');
+      const $minusBtn = document.getElementById('minus');
+      const $result = document.getElementById('result');
 
-      $plusBtn.addEventListener("click", () => {
-        let count = parseInt($result.value);
-        count++;
-        $result.value = count;
+      $plusBtn.addEventListener('click', () => {
+        // let count = parseInt($result.value);
+        // count++;
+        // $result.value = count;
+        $result.value++;
       });
 
-      $minusBtn.addEventListener("click", () => {
-        let count = parseInt($result.value);
-        if (count > 0) {
-          count--;
-          $result.value = count;
+      $minusBtn.addEventListener('click', () => {
+        // let count = parseInt($result.value);
+        if ($result.value > 0) {
+          // count--;
+          // $result.value = count;
+          $result.value--;
+        } else if (+$result.value === 0) {
+          alert('0 미만으로는 내릴 수 없습니다.');
         }
       });
     </script>
