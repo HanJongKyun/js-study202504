@@ -22,15 +22,14 @@ export {
   $currentResultOutput,
   $currentCalculationOutput,
   $logEntries,
-  currentResult,
   logArray,
-  seq,
 };
 
 // 현재 계산기에 그려질 숫자
-let currentResult = 0;
+// let 변수가 타 모듈로 import될 시에는 const로 인식합니다.
+// let currentResult = 0;
 
 // 로그를 모아놓을 배열
 const logArray = [];
 
-let seq = 0; // 로그 번호
+// let seq = 0; // 로그 번호
