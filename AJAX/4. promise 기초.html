@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="show">서버 요청!</button>
+
+    <script>
+      // 비동기 요청을 처리할 함수 따로 분리
+      function get(url) {
+        // promise는 자바스크립트 비동기 통신(ajax)의 순서를 보장하고
+        // 데이터 처리를 용이하게 하기 위한 api입니다.
+        // resolve: 요청에 성공했을 때 실행할 함수
+        // reject: 요청에 실패했을 때 실행할 함수
+        const promise = new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url);
+          xhr.send();
+          xhr.onload = () => {
+            // 200번대 응답은 요청에 대한 응답이 성공적으로 왔다는 것.
+            if (xhr.status === 200) {
+              resolve(JSON.parse(xhr.response));
+            } else {
+              reject('error!');
+            }
+          };
+        });
+        // 마지막에 응답 결과를 가진 promise 객체를 리턴한다.
+        return promise;
+      }
+
+      document.getElementById('show').addEventListener('click', (e) => {
+        // 버튼을 클릭하면
+        // 1. 두번째 회원을 조회
+        // 2. 두번째 회원이 작성한 글 목록을 조회
+        // 3. 두번째 회원이 작성한 글 중 2번 글의 댓글을 조회
+        const url = 'https://jsonplaceholder.typicode.com';
+
+        /*
+        promise는 요청에 대한 응답이 성공적으로 진행되었을 경우 resolve를 통해 
+        응답 데이터를 담습니다.
+        그리고 응답 결과를 가진 promise 객체를 메서드 호출부로 리턴합니다.
+        호출부에서는 promise가 제공하는 then()을 통해서 응답 데이터를 꺼낼 수 있습니다.
+        then() 함수에게 콜백을 주시면, 콜백의 매개값으로 resolve 되었던 응답 데이터를 받아서
+        활용할 수 있습니다.
+        then() 안에서는 또다른 새로운 promise를 반환할 수 있어서, then()함수를 연속해서
+        연결할 수 있습니다. -> 비동기 함수의 순차적인 실행이 가능해 집니다.
+        */
+        get(`${url}/users`)
+          .then((res) => {
+            const userId = res[1].id;
+            return get(`${url}/users/${userId}/posts`);
+          })
+          .then((res) => get(`${url}/comments?postId=${res[1].id}`))
+          .then((res) => console.log(res));
+      });
+    </script>
+  </body>
+</html>

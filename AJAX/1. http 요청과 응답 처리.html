@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="video">
+      <iframe
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/phuiiNCxRMg"
+        title="aespa 에스파 &#39;Supernova&#39; MV"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <button id="load">서버에서 정보 불러오기</button>
+
+    <ul id="contents"></ul>
+
+    <script>
+      const $btn = document.getElementById('load');
+      $btn.addEventListener('click', (e) => {
+        const url = 'https://jsonplaceholder.typicode.com';
+        fetch(`${url}/users/1/posts`)
+          .then((res) => res.json())
+          .then((boardList) => {
+            // 화면에 렌더링 하자.
+            const $ul = document.getElementById('contents');
+            boardList.forEach((b) => {
+              const $newLi = document.createElement('li');
+              $newLi.textContent = `# 글번호: ${b.id}, 제목: ${b.title}, 작성자 아이디: ${b.userId}`;
+
+              $ul.appendChild($newLi);
+            });
+          });
+
+        /*
+        const xhr = new XMLHttpRequest();
+        // 요청 준비
+        xhr.open('GET', `${url}/users/1/posts`);
+
+        // 요청 전송
+        xhr.send();
+
+        // 요청을 보냈으면 당연히 응답이 와야 정상적인 통신이라 할 수 있음.
+        // 응답 정보 확인 (로딩이 끝났다면 -> 요청에 대한 응답이 도착했다면)
+        xhr.onload = () => {
+          console.log('응답 왔다!!!');
+
+          // 서버가 응답한 데이터는 JSON이라는 문자열 포맷이다.
+          // JSON은 javascript가 아님!
+          // JSON -> js로 변환해야 함.
+          // JSON.parse(): JSON -> JS
+          // JSON.stringify(): JS -> JSON
+
+          // JSON을 JS로 파싱 -> 배열 내의 게시글 객체 10개.
+          const boardList = JSON.parse(xhr.response);
+
+          // 화면에 렌더링 하자.
+          const $ul = document.getElementById('contents');
+
+          boardList.forEach((b) => {
+            const $newLi = document.createElement('li');
+            $newLi.textContent = `# 글번호: ${b.id}, 제목: ${b.title}, 작성자 아이디: ${b.userId}`;
+
+            $ul.appendChild($newLi);
+          });
+        };
+        */
+      });
+    </script>
+  </body>
+</html>

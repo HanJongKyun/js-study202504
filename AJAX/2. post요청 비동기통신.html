@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="video">
+      <iframe
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/phuiiNCxRMg"
+        title="aespa 에스파 &#39;Supernova&#39; MV"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div>글제목: <input type="text" id="title" /></div>
+    <div>글내용: <textarea id="content"></textarea></div>
+    <div>
+      <button id="add">등록</button>
+    </div>
+
+    <script>
+      const $btn = document.getElementById('add');
+      $btn.addEventListener('click', (e) => {
+        const url = 'https://jsonplaceholder.typicode.com';
+
+        // 글 등록 요청 -> 백엔드가 post 방식으로 보내라 함!
+        // 조회같은 경우에는 url에 요청 정보를 보냈죠?
+        // 글 등록은 등록 정보를 함께 전송해야 합니다. -> JSON 으로!!!!!!
+        const payload = {
+          title: document.getElementById('title').value,
+          body: document.getElementById('content').value,
+          userId: 1,
+        };
+
+        // get 이외의 요청 방식에서는 url과 함께 요청에 관련된 정보를
+        // 객체 형태로 전달하셔야 합니다. (method, headers, body)
+        fetch(`${url}/boards`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+
+        /*
+        const xhr = new XMLHttpRequest();
+        // 요청 준비
+        // 백엔드와 사전에 약속된 전송 방식과 약속된 url로 요청, 응답을 처리한다!
+        xhr.open('POST', `${url}/boards`);
+
+        // 요청 헤더에 payload의 타입을 명시해야 합니다.
+        xhr.setRequestHeader('content-type', 'application/json');
+
+        // 요청 전송(순수 자바스크립트 객체를 JSON으로 변환해서 보내셔야 해요!)
+        xhr.send(JSON.stringify(payload));
+
+        // 요청을 보냈으면 당연히 응답이 와야 정상적인 통신이라 할 수 있음.
+        // 응답 정보 확인 (로딩이 끝났다면 -> 요청에 대한 응답이 도착했다면)
+        xhr.onload = () => {
+          console.log('응답 왔다!!!');
+
+          console.log(xhr.response);
+        };
+
+        */
+      });
+    </script>
+  </body>
+</html>
